@@ -1,0 +1,44 @@
+{
+    "Records": [
+        {
+            "messageId" : "msgId1",
+            "body": {
+                "AlarmName": "lambda-concurrency-threshold",
+                "AlarmDescription": "ALARM! ALARM! ALARM!",
+                "AWSAccountId": "111111111111",
+                "AlarmConfigurationUpdatedTimestamp": "2023-02-11T15:40:40.440+0000",
+                "NewStateValue": "ALARM",
+                "NewStateReason": "Threshold Crossed: 5 out of the last 5 datapoints were greater than the threshold (2.0). The most recent datapoints which crossed the threshold: [2.9990814749554024 (11/02/23 15:40:00), 2.9993049992900214 (11/02/23 15:39:00), 2.9989961617695964 (11/02/23 15:38:00), 2.999051364142116 (11/02/23 15:37:00), 2.9992470898324566 (11/02/23 15:36:00)] (minimum 3 datapoints for OK -> ALARM transition).",
+                "StateChangeTime": "2023-02-11T15:41:57.192+0000",
+                "Region": "EU (London)",
+                "AlarmArn": "arn:aws:cloudwatch:eu-west-1:111111111111:alarm:lambda-exceeds-concurrency-threshold",
+                "OldStateValue": "OK",
+                "OKActions": [],
+                "AlarmActions": [
+                    "arn:aws:sns:eu-west-1:111111111111:lambda-concurrency-alarm"
+                ],
+                "InsufficientDataActions": [],
+                "Trigger": {
+                    "MetricName": "ConcurrentExecutions",
+                    "Namespace": "AWS/Lambda",
+                    "StatisticType": "ExtendedStatistic",
+                    "ExtendedStatistic": "p99.9",
+                    "Unit": null,
+                    "Dimensions": [
+                        {
+                            "value": "lambda-terminator-dev-disable-lambda-queueWorker",
+                            "name": "FunctionName"
+                        }
+                    ],
+                    "Period": 60,
+                    "EvaluationPeriods": 5,
+                    "DatapointsToAlarm": 3,
+                    "ComparisonOperator": "GreaterThanThreshold",
+                    "Threshold": 2.0,
+                    "TreatMissingData": "missing",
+                    "EvaluateLowSampleCountPercentile": ""
+                }
+            }
+        }
+    ]
+}

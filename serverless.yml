@@ -1,0 +1,42 @@
+service: lambda-terminator
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+  stage: dev
+  region: eu-west-1
+
+  deploymentBucket:
+    name: serverless-deployments-${aws:accountId}
+    blockPublicAccess: true
+    maxPreviousDeploymentArtifacts: 50
+
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "lambda:PutFunctionConcurrency"
+          Resource: '*'
+
+#functions:
+#  throttle:
+#    handler: handler.lambdaTerminator
+#    memorySize: 128
+#    description: Throttles lambda provided as input.
+
+constructs:
+  disable-lambda-queue:
+    type: queue
+    batchSize: 10
+    worker:
+      handler: handler.lambdaTerminator
+      memorySize: 128
+      description: Throttles lambda provided as input.
+
+
+plugins:
+  - serverless-lift
